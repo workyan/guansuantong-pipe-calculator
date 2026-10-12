@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "input": "/Users/cc/StudioProjects/guansuantong-pipe-calculator/.assets/generated_sources/slope_elevation.png",
+  "output": "/Users/cc/StudioProjects/guansuantong-pipe-calculator/assets/generated/slope_elevation.png",
+  "background_rgb": [
+    255,
+    0,
+    255
+  ],
+  "threshold": 42.0,
+  "feather_threshold": 82.0,
+  "trimmed": true,
+  "padding": 28,
+  "width": 1182,
+  "height": 833,
+  "transparent_pixels": 1131433,
+  "opaque_pixels": 441083
+}

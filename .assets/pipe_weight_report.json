@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "input": "/Users/cc/StudioProjects/guansuantong-pipe-calculator/.assets/generated_sources/pipe_weight.png",
+  "output": "/Users/cc/StudioProjects/guansuantong-pipe-calculator/assets/generated/pipe_weight.png",
+  "background_rgb": [
+    255,
+    0,
+    255
+  ],
+  "threshold": 42.0,
+  "feather_threshold": 82.0,
+  "trimmed": true,
+  "padding": 28,
+  "width": 1099,
+  "height": 1143,
+  "transparent_pixels": 831525,
+  "opaque_pixels": 740991
+}

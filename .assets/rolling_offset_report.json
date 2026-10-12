@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "input": "/Users/cc/StudioProjects/guansuantong-pipe-calculator/.assets/generated_sources/rolling_offset.png",
+  "output": "/Users/cc/StudioProjects/guansuantong-pipe-calculator/assets/generated/rolling_offset.png",
+  "background_rgb": [
+    255,
+    0,
+    255
+  ],
+  "threshold": 42.0,
+  "feather_threshold": 82.0,
+  "trimmed": true,
+  "padding": 28,
+  "width": 1220,
+  "height": 1010,
+  "transparent_pixels": 1298959,
+  "opaque_pixels": 273557
+}

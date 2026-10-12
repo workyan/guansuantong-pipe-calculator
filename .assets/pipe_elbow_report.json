@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "input": "/Users/cc/StudioProjects/guansuantong-pipe-calculator/.assets/pipe_icon_source.png",
+  "output": "/Users/cc/StudioProjects/guansuantong-pipe-calculator/.assets/pipe_elbow_transparent.png",
+  "background_rgb": [
+    255,
+    0,
+    255
+  ],
+  "threshold": 35.0,
+  "feather_threshold": 64.0,
+  "trimmed": true,
+  "padding": 24,
+  "width": 1254,
+  "height": 1133,
+  "transparent_pixels": 1030868,
+  "opaque_pixels": 541648
+}
