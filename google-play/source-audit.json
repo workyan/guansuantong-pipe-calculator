@@ -1,0 +1,16 @@
+{
+  "reviewedCommit": "3f651d30f901c30dd727ef469438832aba606db3",
+  "scope": "Existing Flutter source, not an Android build verification.",
+  "sourceFiles": {
+    "lib/calculation_engine.dart": "9b617be1687ed20d51d3cba759df8b476a140af58ffef3c490525fa7d5b76d61",
+    "lib/main.dart": "c15bbb63b4ca7220db7333dcd9007f3d5a43aaa5ae24531a7021162ea127ee7a",
+    "lib/app_state.dart": "2f20ae22e25886344cc1576fa8846fe7eb769ea6e2b564bfb19c674eb0b3e0a9"
+  },
+  "existingAdsOrAnalyticsSdkFound": false,
+  "screenshotsSource": "Real iOS raster references from app-store-shot-factory, without translated UI; draft only.",
+  "releaseIssues": [
+    "当前应用界面为中文；先完成英文界面后再采集最终截图。",
+    "当前源码使用公制；文案没有承诺英制或分数英寸。",
+    "结果分享为文本，不宣传未实现的结果图片导出。"
+  ]
+}

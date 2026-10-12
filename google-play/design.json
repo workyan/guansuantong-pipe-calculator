@@ -1,0 +1,9 @@
+{
+  "brand": "Pipe QuickCalc",
+  "bg": "#F4F2EB",
+  "dark": "#123C34",
+  "accent": "#0D5C4D",
+  "image": "source/feature-visual.png",
+  "tagline": "Pipe calculations.\nReady for the job.",
+  "icon": "source/app-icon.png"
+}

@@ -1,0 +1,20 @@
+{
+  "locale": "en-US",
+  "title": "Pipe QuickCalc: Offsets",
+  "shortDescription": "Calculate pipe offsets, cut lengths, slopes and material weight offline.",
+  "fullDescription": "Pipe QuickCalc brings five practical pipe calculators into one focused tool for pipefitters, welders and installation crews.\n\nPIPE OFFSETS\nCalculate centerline travel and horizontal advance from an offset and elbow angle. Enter fitting take-offs to find the net cut length. Use common angles or enter a custom angle.\n\nROLLING OFFSETS\nEnter horizontal and vertical offsets to calculate true offset, roll angle, travel and advance.\n\nSLOPE AND ELEVATION\nCalculate fall from distance and slope, or work back to the slope from a known fall or start and end elevations. Generate elevation points at a chosen spacing.\n\nCUT LENGTHS\nSubtract the take-off at each end from a center-to-center measurement. Review the original distance, total deduction and net length together.\n\nPIPE WEIGHT\nEstimate theoretical weight from outside diameter, wall thickness, length, quantity and material density. View weight per metre, per pipe and for the full quantity.\n\nKEEP YOUR WORK ORGANIZED\nSave calculation history, group results by project, keep favorite tools close and copy or share result text. Core calculations work offline without an account, ads or subscriptions.\n\nCurrent calculation inputs use metric units. This is a calculation aid, not a pipe-fitting standards database or an engineering approval system. Check units, actual fitting dimensions, drawings and applicable local requirements before cutting, welding or installing.",
+  "category": "Tools",
+  "appType": "App",
+  "supportEmail": "1535883467@qq.com",
+  "supportEmailSource": "Existing public Sheet Metal app support page; confirm before publishing.",
+  "existingPrivacyUrl": "https://workyan.github.io/docs/guansuantong-pipe-calculator/privacy.html",
+  "existingSupportUrl": "https://workyan.github.io/docs/guansuantong-pipe-calculator/support.html",
+  "privacyUrlStatus": "Existing public iOS policy; update for Android before submission.",
+  "suggestedInitialPaidPriceUSD": "4.99",
+  "pricingStatus": "Suggestion only; not applied in Play Console.",
+  "codeReviewIssues": [
+    "当前应用界面为中文；先完成英文界面后再采集最终截图。",
+    "当前源码使用公制；文案没有承诺英制或分数英寸。",
+    "结果分享为文本，不宣传未实现的结果图片导出。"
+  ]
+}

@@ -1,0 +1,2 @@
+Icon: Pipe QuickCalc app icon.
+Feature graphic: Pipe calculations. Ready for the job.

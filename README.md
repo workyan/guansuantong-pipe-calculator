@@ -47,3 +47,7 @@ flutter build ios --release --no-codesign
 ## 产品边界
 
 V1 是现场几何、坡度和重量计算工具，不是流体设计软件，不计算泵选型、管网水力平衡、承压等级或施工合规结论。
+
+## Google Play handoff
+
+See [google-play/README.md](google-play/README.md) for English listing text, store graphics, screenshot drafts, Android capture instructions and release checks. Open [google-play/preview.html](google-play/preview.html) locally to review the materials.

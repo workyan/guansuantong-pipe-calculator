@@ -1,0 +1,62 @@
+[
+  {
+    "file": "screenshots-draft/01-offset-tools-1080x1920.png",
+    "source": "source/ios-reference/01-offset-tools.png",
+    "sourcePlatform": "ios-reference",
+    "locale": "zh-CN",
+    "headline": "Pipe calculations,\nin one place",
+    "width": 1080,
+    "height": 1920,
+    "status": "draft-not-for-upload"
+  },
+  {
+    "file": "screenshots-draft/02-rolling-offset-1080x1920.png",
+    "source": "source/ios-reference/02-rolling-offset.png",
+    "sourcePlatform": "ios-reference",
+    "locale": "zh-CN",
+    "headline": "Resolve rolling\noffsets",
+    "width": 1080,
+    "height": 1920,
+    "status": "draft-not-for-upload"
+  },
+  {
+    "file": "screenshots-draft/03-slope-elevation-1080x1920.png",
+    "source": "source/ios-reference/03-slope-elevation.png",
+    "sourcePlatform": "ios-reference",
+    "locale": "zh-CN",
+    "headline": "Set out each\nelevation",
+    "width": 1080,
+    "height": 1920,
+    "status": "draft-not-for-upload"
+  },
+  {
+    "file": "screenshots-draft/04-cut-length-1080x1920.png",
+    "source": "source/ios-reference/04-cut-length.png",
+    "sourcePlatform": "ios-reference",
+    "locale": "zh-CN",
+    "headline": "Find the net\ncut length",
+    "width": 1080,
+    "height": 1920,
+    "status": "draft-not-for-upload"
+  },
+  {
+    "file": "screenshots-draft/05-pipe-weight-1080x1920.png",
+    "source": "source/ios-reference/05-pipe-weight.png",
+    "sourcePlatform": "ios-reference",
+    "locale": "zh-CN",
+    "headline": "Estimate pipe\nweight",
+    "width": 1080,
+    "height": 1920,
+    "status": "draft-not-for-upload"
+  },
+  {
+    "file": "screenshots-draft/06-project-records-1080x1920.png",
+    "source": "source/ios-reference/06-project-records.png",
+    "sourcePlatform": "ios-reference",
+    "locale": "zh-CN",
+    "headline": "Keep each job\ntogether",
+    "width": 1080,
+    "height": 1920,
+    "status": "draft-not-for-upload"
+  }
+]

@@ -1,0 +1,97 @@
+{
+  "checkedAt": "2026-10-12T09:15:19.513Z",
+  "mode": "ios-reference-draft",
+  "listingLengths": {
+    "title": 23,
+    "shortDescription": 72,
+    "fullDescription": 1419
+  },
+  "files": [
+    {
+      "file": "graphics/icon-512.png",
+      "width": 512,
+      "height": 512,
+      "channels": 4,
+      "alpha": true,
+      "bytes": 410446,
+      "nonBlank": true,
+      "sha256": "7a4d26b02e538e9ebb65b729f4fd225648cd1f9ba38fcfc040bb1b426f048063"
+    },
+    {
+      "file": "graphics/feature-graphic-1024x500.png",
+      "width": 1024,
+      "height": 500,
+      "channels": 3,
+      "alpha": false,
+      "bytes": 80948,
+      "nonBlank": true,
+      "sha256": "f4daf5319cc3efdf4d17bccf3c7b0f351c10558fd85efdc1635db33c92e1723d"
+    },
+    {
+      "file": "screenshots-draft/01-offset-tools-1080x1920.png",
+      "width": 1080,
+      "height": 1920,
+      "channels": 3,
+      "alpha": false,
+      "bytes": 345767,
+      "nonBlank": true,
+      "sha256": "5f730177cb402084a9128be256c818bb633402e6331ff3073db785f216e90d1d"
+    },
+    {
+      "file": "screenshots-draft/02-rolling-offset-1080x1920.png",
+      "width": 1080,
+      "height": 1920,
+      "channels": 3,
+      "alpha": false,
+      "bytes": 236691,
+      "nonBlank": true,
+      "sha256": "80dc2e00551fa164c6089e11a5c80d69e65780ab63d673a74ef4bb62cad23241"
+    },
+    {
+      "file": "screenshots-draft/03-slope-elevation-1080x1920.png",
+      "width": 1080,
+      "height": 1920,
+      "channels": 3,
+      "alpha": false,
+      "bytes": 304130,
+      "nonBlank": true,
+      "sha256": "cd3231cdbf02ba77cb0f8b9f052f4e8c33dc4eec5c26e6512f89b33b8da71d1f"
+    },
+    {
+      "file": "screenshots-draft/04-cut-length-1080x1920.png",
+      "width": 1080,
+      "height": 1920,
+      "channels": 3,
+      "alpha": false,
+      "bytes": 271626,
+      "nonBlank": true,
+      "sha256": "e2f664eb57de02061d24bafd7144eaef57e717c8049a566bf5d56ab643bc360f"
+    },
+    {
+      "file": "screenshots-draft/05-pipe-weight-1080x1920.png",
+      "width": 1080,
+      "height": 1920,
+      "channels": 3,
+      "alpha": false,
+      "bytes": 271351,
+      "nonBlank": true,
+      "sha256": "d60f1b9c1ac16ea95185de7921f85d14a6adc957effcef3344f74574dc5e905e"
+    },
+    {
+      "file": "screenshots-draft/06-project-records-1080x1920.png",
+      "width": 1080,
+      "height": 1920,
+      "channels": 3,
+      "alpha": false,
+      "bytes": 124609,
+      "nonBlank": true,
+      "sha256": "fd8381c5404d989e1b9f5cfc522a639db0b666418c719b2f4c44c39918a7e6a0"
+    }
+  ],
+  "remaining": [
+    "当前应用界面为中文；先完成英文界面后再采集最终截图。",
+    "当前源码使用公制；文案没有承诺英制或分数英寸。",
+    "结果分享为文本，不宣传未实现的结果图片导出。"
+  ],
+  "finalExportGuard": "Verified refusal when Android capture provenance is absent."
+}
