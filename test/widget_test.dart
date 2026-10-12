@@ -1,3 +1,4 @@
+import 'package:guansuantong_pipe_calculator/app_language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:guansuantong_pipe_calculator/main.dart';
@@ -8,9 +9,9 @@ void main() {
       const PipeQuickCalcApp(screenshotScene: 'home-overview'),
     );
     await tester.pumpAndSettle();
-    expect(find.text('管算通'), findsOneWidget);
-    expect(find.text('全部计算器'), findsOneWidget);
-    expect(find.text('滚动偏移'), findsWidgets);
+    expect(find.text(AppStrings.pipeQuickCalc), findsOneWidget);
+    expect(find.text(AppStrings.allCalculators), findsOneWidget);
+    expect(find.text(AppStrings.rollingOffset), findsWidgets);
   });
 
   testWidgets('calculator updates from editable input', (tester) async {

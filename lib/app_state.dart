@@ -1,3 +1,4 @@
+import 'app_language.dart';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -75,7 +76,11 @@ class AppState extends ChangeNotifier {
   bool saveHistory = true;
   int decimals = 2;
   ThemeMode themeMode = ThemeMode.system;
-  final Set<String> favorites = {'滚动偏移', '坡度标高', '切管长度'};
+  final Set<String> favorites = {
+    AppStrings.rollingOffset,
+    AppStrings.slopeElevation,
+    AppStrings.cutLength,
+  };
   final List<SavedRecord> records = [];
   final List<PipeProject> projects = [];
 
@@ -91,7 +96,14 @@ class AppState extends ChangeNotifier {
     themeMode = ThemeMode.values[themeIndex];
     favorites
       ..clear()
-      ..addAll(_prefs!.getStringList('favorites') ?? ['滚动偏移', '坡度标高', '切管长度']);
+      ..addAll(
+        _prefs!.getStringList('favorites') ??
+            [
+              AppStrings.rollingOffset,
+              AppStrings.slopeElevation,
+              AppStrings.cutLength,
+            ],
+      );
     _decodeList('records', SavedRecord.fromJson, records);
     _decodeList('projects', PipeProject.fromJson, projects);
     ready = true;
@@ -109,14 +121,14 @@ class AppState extends ChangeNotifier {
       ..addAll([
         PipeProject(
           id: 'project-chiller',
-          name: '冷冻机房改造',
-          location: 'A 区 B1 层',
+          name: AppStrings.chillerRoomRetrofit,
+          location: AppStrings.areaALevelB1,
           createdAt: anchor.subtract(const Duration(days: 12)),
         ),
         PipeProject(
           id: 'project-workshop',
-          name: '二号车间消防管',
-          location: '生产楼 2F',
+          name: AppStrings.workshopFireLine,
+          location: AppStrings.productionBuildingLevel2,
           createdAt: anchor.subtract(const Duration(days: 6)),
         ),
       ]);
@@ -125,32 +137,32 @@ class AppState extends ChangeNotifier {
       ..addAll([
         SavedRecord(
           id: 'record-1',
-          type: '滚动偏移',
-          summary: '中心距 480.0 mm',
-          detail: '横向 320 mm · 竖向 360 mm · 45° 弯头',
+          type: AppStrings.rollingOffset,
+          summary: AppStrings.centerDistance4800Mm,
+          detail: AppStrings.h320MmV360Mm45Elbow,
           createdAt: anchor.subtract(const Duration(minutes: 18)),
           projectId: 'project-chiller',
         ),
         SavedRecord(
           id: 'record-2',
-          type: '坡度标高',
-          summary: '终点标高 2,416.0 mm',
-          detail: '长度 12 m · 坡度 0.7%',
+          type: AppStrings.slopeElevation,
+          summary: AppStrings.endElevation24160Mm,
+          detail: AppStrings.length12MSlope07,
           createdAt: anchor.subtract(const Duration(hours: 3)),
           projectId: 'project-chiller',
         ),
         SavedRecord(
           id: 'record-3',
-          type: '切管长度',
-          summary: '下料长度 1,826.0 mm',
-          detail: '中心距 2,000 mm · 扣除 174 mm',
+          type: AppStrings.cutLength,
+          summary: AppStrings.cutLength18260Mm,
+          detail: AppStrings.centers2000MmTakeOff174Mm,
           createdAt: anchor.subtract(const Duration(days: 1)),
           projectId: 'project-workshop',
         ),
         SavedRecord(
           id: 'record-4',
-          type: '管材重量',
-          summary: '总重 186.4 kg',
+          type: AppStrings.pipeWeight,
+          summary: AppStrings.totalWeight1864Kg,
           detail: 'DN100 · 18 m · 10.36 kg/m',
           createdAt: anchor.subtract(const Duration(days: 2)),
           projectId: 'project-workshop',

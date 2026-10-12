@@ -1,0 +1,34 @@
+{
+  "reviewedAt": "2026-10-12T10:53:35.741414+00:00",
+  "assetStatus": "ready for the English phone listing; compare against signed release before submitting",
+  "visualDirection": "暖色工业工具：米白底、深绿结果卡、紧凑无外框界面",
+  "reviewMethod": "Visual review of six-slide contact sheet, real source images and selected full-size exports; source code review for feature claims.",
+  "checks": {
+    "actualAndroidUI": true,
+    "englishUI": true,
+    "noRepaintedOrInventedAppControls": true,
+    "headlineAndScreenshotDoNotOverlap": true,
+    "appUIWidthAtLeast70Percent": true,
+    "keyResultsAndControlsVisible": true,
+    "oneBenefitPerSlide": true,
+    "noPricingRankingAwardsOrDownloadClaims": true,
+    "noBlankOrPlaceholderExport": true,
+    "noSimulatorRuntimeErrors": true,
+    "rawCaptureHashesVerified": true
+  },
+  "assetSha256": {
+    "graphics/feature-graphic-1024x500.png": "f4daf5319cc3efdf4d17bccf3c7b0f351c10558fd85efdc1635db33c92e1723d",
+    "graphics/icon-512.png": "7a4d26b02e538e9ebb65b729f4fd225648cd1f9ba38fcfc040bb1b426f048063",
+    "screenshots-final/01-offset-tools-1080x1920.png": "f9a219fce54862756dd1e61c7963ad693640692ef91a8f25eb16de9fa82a01a2",
+    "screenshots-final/02-rolling-offset-1080x1920.png": "119ed30f96b922fc71cc14f9919b4d8e52ff628cd2def2caf9f56af0f07b0715",
+    "screenshots-final/03-slope-elevation-1080x1920.png": "1a7cba8d1e50b76465eca281149364dc3ceaceee129350070eb377b3a3c006ee",
+    "screenshots-final/04-cut-length-1080x1920.png": "34edf9779f6a4e90b6179a07e35e015814aca3da8b7418d8f8353ec4e9026ee1",
+    "screenshots-final/05-pipe-weight-1080x1920.png": "7fd48d838a226054ef100f6017ac1bc4892cd599787c5350fdabf1b20e7624ad",
+    "screenshots-final/06-project-records-1080x1920.png": "d4bae4d7d64daa6bcf4ff436a7ef93774a412a1be7f0e7916e71de942f5c3214"
+  },
+  "remainingReleaseSteps": [
+    "Set up the local upload signing key and build/test the release AAB.",
+    "Publish the Android English privacy/support pages and confirm the contact email.",
+    "Complete applicable Play Console declarations and testing requirements."
+  ]
+}

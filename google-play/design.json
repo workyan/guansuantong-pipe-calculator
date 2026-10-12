@@ -5,5 +5,9 @@
   "accent": "#0D5C4D",
   "image": "source/feature-visual.png",
   "tagline": "Pipe calculations.\nReady for the job.",
-  "icon": "source/app-icon.png"
+  "icon": "source/app-icon.png",
+  "applicationId": "com.cc.guansuantong",
+  "captureChannel": "guansuantong_pipe_calculator/screenshot_config",
+  "languageDefine": "APP_LANGUAGE=en",
+  "style": "暖色工业工具：米白底、深绿结果卡、紧凑无外框界面"
 }

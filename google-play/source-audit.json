@@ -1,16 +1,59 @@
 {
-  "reviewedCommit": "3f651d30f901c30dd727ef469438832aba606db3",
-  "scope": "Existing Flutter source, not an Android build verification.",
+  "reviewedAt": "2026-10-12T10:53:35.662781+00:00",
+  "baseCommitBeforeChanges": "8c9504a5b7fca6e00ce754aa20a94c8b1c46f127",
+  "scope": "Current Flutter and Android source, debug APK, real simulator scenes, marketing assets. Signed release AAB and physical-device validation remain with the submitting developer.",
   "sourceFiles": {
-    "lib/calculation_engine.dart": "9b617be1687ed20d51d3cba759df8b476a140af58ffef3c490525fa7d5b76d61",
-    "lib/main.dart": "c15bbb63b4ca7220db7333dcd9007f3d5a43aaa5ae24531a7021162ea127ee7a",
-    "lib/app_state.dart": "2f20ae22e25886344cc1576fa8846fe7eb769ea6e2b564bfb19c674eb0b3e0a9"
+    "android/app/build.gradle.kts": "0236f4757ccb1f53eea95f7626571831adfff77127cce2e1bce05b9a8911d4a9",
+    "android/app/src/debug/AndroidManifest.xml": "30b0832ed8b92dfbd6ae2abfa939ccf26333d37600056b1572bd4a397a18a74b",
+    "android/app/src/main/AndroidManifest.xml": "2de154c2f2cfce4afcb68199605bca0a65b7ee6c30cf18eeec57db4a7df8770c",
+    "android/app/src/main/kotlin/com/cc/guansuantong/MainActivity.kt": "618c1a2e4f7691a9c511f8519cafcc62c8b4da369eca623f5e06750d27ca454c",
+    "android/app/src/main/res/drawable/launch_background.xml": "94433756fe10005ddd6fc55cc5c0b1e9f3c10b66a08ceac795ece6713d34e28a",
+    "android/app/src/main/res/drawable-v21/launch_background.xml": "7ca6d5cec2169c5a98661a119db23a6f3399c8fef2256ff04f3a642831282478",
+    "android/app/src/main/res/values/styles.xml": "937d7c82f539c72eb94fd3a3773f29b3d3fef1997213c92cb632298cedf4bda9",
+    "android/app/src/main/res/values-night/styles.xml": "8c5bad5152f217e837519f9c15211d19f39bd45f5f67faf6dd81cb4b299e518f",
+    "android/app/src/profile/AndroidManifest.xml": "30b0832ed8b92dfbd6ae2abfa939ccf26333d37600056b1572bd4a397a18a74b",
+    "android/build.gradle.kts": "6a26dba2cb8dfba1e74f540b0d17a89d96c1301d3c3bfda14348bed257fddcba",
+    "android/gradle/wrapper/gradle-wrapper.properties": "3221993eac1057198d652b7437105e2953ca4850d415eb0eb2b9625874fd059e",
+    "android/gradle.properties": "0f82b18017fba6bb5ce3aa4b2d1a00c9382fc8aae7b1d9326e44b18abd66d80b",
+    "android/settings.gradle.kts": "b76d554153a63772dddbe2ee91abdf582f5f871af40698b80a2ef7b70903d96f",
+    "lib/app_language.dart": "cf0bc0bcc2eabb5695ef29b0c1f825d1fe0a84935adb51c40acbd3c50b44dab7",
+    "lib/app_state.dart": "a822730da59302e8ca2a6e84d586ecdc6f49096942fde074d5cfe0d88cfa7dae",
+    "lib/calculation_engine.dart": "207b5c4a1123b4f4e95554e5f9eacdea25da9c73a3fdb56240838ba43ed9098d",
+    "lib/main.dart": "2b58ca8eb3bdda07389a60e89c9e7d154484d61be48b18e3c6c639832dfcd3a6",
+    "pubspec.lock": "2044ea1949b4f0ea4cbe22fe6eb3e55a1c0c2bd99dff2f7b1e52b2ccffeb4d5a",
+    "pubspec.yaml": "b31852c8c76ed4145759733a3f39109a9367ae61e3ae8ec7370d753934212cba",
+    "test/calculation_engine_test.dart": "f43ec7d38d0d7c23565b4546a237119a3a26001e2c3131c3426b8f8b59bf5c39",
+    "test/widget_test.dart": "00298ff2aa72123bd9f43949fceb5563df8f17b232f085a10aa6f9cc9acce4b8"
   },
+  "flutterVersion": "3.44.8",
+  "dartVersion": "3.12.2",
+  "analyze": "No issues found",
+  "tests": [
+    {
+      "locale": "en",
+      "passed": 11,
+      "result": "passed",
+      "testOutputSha256": "7dbf6be04bb9714f4a41ad5171b1ce654d89321cb72f450a3b05e538595f3bc0"
+    },
+    {
+      "locale": "zh",
+      "passed": 11,
+      "result": "passed",
+      "testOutputSha256": "7dbf6be04bb9714f4a41ad5171b1ce654d89321cb72f450a3b05e538595f3bc0"
+    }
+  ],
+  "androidDebugBuild": "passed",
+  "applicationId": "com.cc.guansuantong",
+  "minSdk": 24,
+  "targetSdk": 36,
+  "apkSha256": "dcfa6e6424712ee5b4f289ab47be8fae661f0b75fe0645b876dd60f84efe63b9",
   "existingAdsOrAnalyticsSdkFound": false,
-  "screenshotsSource": "Real iOS raster references from app-store-shot-factory, without translated UI; draft only.",
-  "releaseIssues": [
-    "当前应用界面为中文；先完成英文界面后再采集最终截图。",
-    "当前源码使用公制；文案没有承诺英制或分数英寸。",
-    "结果分享为文本，不宣传未实现的结果图片导出。"
-  ]
+  "screenshotsSource": "Real English Android emulator PNGs; native debug-only scene bridge; real app widgets with deterministic sample data.",
+  "functionalBoundariesAndReleaseSteps": [
+    "当前输入使用公制，商店没有宣传英制或分数英寸。",
+    "结果复制和分享为文本，不宣传图片、PDF 或 CAD 导出。",
+    "提交前发布 Android 英文隐私页，并核对客服邮箱和最终签名包。",
+    "在另一台电脑配置本地上传密钥，构建并验证 release AAB。"
+  ],
+  "missingUploadKeyReleaseGate": "verified: release task fails before packaging"
 }

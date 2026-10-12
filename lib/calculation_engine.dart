@@ -1,3 +1,4 @@
+import 'app_language.dart';
 import 'dart:math' as math;
 
 class CalculationResult {
@@ -25,19 +26,19 @@ class CalculationResult {
     for (final row in table) {
       buffer.writeln('${row.key}：${row.value}');
     }
-    buffer.write('公式：$formula');
-    if (warning != null) buffer.write('\n提示：$warning');
+    buffer.write(AppStrings.formula(formula));
+    if (warning != null) buffer.write(AppStrings.note(warning));
     return buffer.toString();
   }
 }
 
 class PipeCalculator {
   static const densities = <String, double>{
-    '碳钢': 7850,
-    '304 不锈钢': 7930,
-    '316 不锈钢': 7980,
-    '铝': 2700,
-    '紫铜': 8960,
+    AppStrings.carbonSteel: 7850,
+    AppStrings.label304StainlessSteel: 7930,
+    AppStrings.label316StainlessSteel: 7980,
+    AppStrings.aluminum: 2700,
+    AppStrings.copper: 8960,
     'PVC': 1400,
   };
 
@@ -48,25 +49,28 @@ class PipeCalculator {
     double right = 0,
     int decimals = 2,
   }) {
-    _positive(offset, '目标偏移量');
+    _positive(offset, AppStrings.offset);
     _angle(angle);
-    _nonNegative(left, '左端扣除');
-    _nonNegative(right, '右端扣除');
+    _nonNegative(left, AppStrings.leftTakeOff);
+    _nonNegative(right, AppStrings.rightTakeOff);
     final radians = angle * math.pi / 180;
     final travel = offset / math.sin(radians);
     final advance = offset / math.tan(radians);
     final net = travel - left - right;
     return CalculationResult(
-      primaryLabel: '净切管长度',
+      primaryLabel: AppStrings.netCutLength,
       primaryValue: '${_f(net, decimals)} mm',
       values: {
-        '斜管中心线行程': '${_f(travel, decimals)} mm',
-        '水平推进量': '${_f(advance, decimals)} mm',
-        '总扣除量': '${_f(left + right, decimals)} mm',
-        '净切管长度': '${_f(net, decimals)} mm',
+        AppStrings.centerlineTravel: '${_f(travel, decimals)} mm',
+        AppStrings.horizontalAdvance: '${_f(advance, decimals)} mm',
+        AppStrings.totalTakeOff: '${_f(left + right, decimals)} mm',
+        AppStrings.netCutLength: '${_f(net, decimals)} mm',
       },
-      formula: '行程 = 偏移量 ÷ sin($angle°)',
-      warning: net <= 0 ? '管件扣除量超过中心线行程，请复核尺寸。' : null,
+      formula: AppStrings.travelOffsetSin(angle),
+      warning: net <= 0
+          ? AppStrings
+                .fittingTakeOffsExceedTheCenterlineTravelCheckTheDimensions
+          : null,
     );
   }
 
@@ -79,30 +83,34 @@ class PipeCalculator {
     int decimals = 2,
   }) {
     if (horizontal == 0 && vertical == 0) {
-      throw const FormatException('水平偏移和垂直偏移不能同时为 0');
+      throw const FormatException(
+        AppStrings.horizontalAndVerticalOffsetsCannotBothBeZero,
+      );
     }
     _angle(angle);
-    _nonNegative(left, '左端扣除');
-    _nonNegative(right, '右端扣除');
+    _nonNegative(left, AppStrings.leftTakeOff);
+    _nonNegative(right, AppStrings.rightTakeOff);
     final real = math.sqrt(horizontal * horizontal + vertical * vertical);
     final roll = math.atan2(vertical.abs(), horizontal.abs()) * 180 / math.pi;
     final travel = real / math.sin(angle * math.pi / 180);
     final net = travel - left - right;
     final hasNegative = horizontal < 0 || vertical < 0;
     return CalculationResult(
-      primaryLabel: '净切管长度',
+      primaryLabel: AppStrings.netCutLength,
       primaryValue: '${_f(net, decimals)} mm',
       values: {
-        '真实偏移量': '${_f(real, decimals)} mm',
-        '滚动角': '${_f(roll, decimals)}°',
-        '中心线行程': '${_f(travel, decimals)} mm',
-        '净切管长度': '${_f(net, decimals)} mm',
+        AppStrings.trueOffset: '${_f(real, decimals)} mm',
+        AppStrings.rollAngle: '${_f(roll, decimals)}°',
+        AppStrings.centerlineTravelHeaa717: '${_f(travel, decimals)} mm',
+        AppStrings.netCutLength: '${_f(net, decimals)} mm',
       },
-      formula: '真实偏移 = √(H² + V²)，行程 = 真实偏移 ÷ sin($angle°)',
+      formula: AppStrings.trueOffsetHVTravelTrueOffsetSin(angle),
       warning: net <= 0
-          ? '管件扣除量超过中心线行程，请复核尺寸。'
+          ? AppStrings
+                .fittingTakeOffsExceedTheCenterlineTravelCheckTheDimensions
           : hasNegative
-          ? '已按绝对尺寸计算，请确认现场偏移方向。'
+          ? AppStrings
+                .calculatedFromAbsoluteDimensionsCheckTheOffsetDirectionOnSite
           : null,
     );
   }
@@ -113,20 +121,23 @@ class PipeCalculator {
     required double right,
     int decimals = 2,
   }) {
-    _positive(center, '中心距');
-    _nonNegative(left, '左端扣除');
-    _nonNegative(right, '右端扣除');
+    _positive(center, AppStrings.centerDistance);
+    _nonNegative(left, AppStrings.leftTakeOff);
+    _nonNegative(right, AppStrings.rightTakeOff);
     final net = center - left - right;
     return CalculationResult(
-      primaryLabel: '净切管长度',
+      primaryLabel: AppStrings.netCutLength,
       primaryValue: '${_f(net, decimals)} mm',
       values: {
-        '两连接点中心距': '${_f(center, decimals)} mm',
-        '总扣除量': '${_f(left + right, decimals)} mm',
-        '净切管长度': '${_f(net, decimals)} mm',
+        AppStrings.centerToCenterDistance: '${_f(center, decimals)} mm',
+        AppStrings.totalTakeOff: '${_f(left + right, decimals)} mm',
+        AppStrings.netCutLength: '${_f(net, decimals)} mm',
       },
-      formula: '净切管长度 = 中心距 − 左端扣除 − 右端扣除',
-      warning: net <= 0 ? '扣除量超过中心距，当前结果不可用于下料。' : null,
+      formula: AppStrings.netCutLengthCenterDistanceLeftTakeOffRightTakeOff,
+      warning: net <= 0
+          ? AppStrings
+                .takeOffsExceedTheCenterDistanceDoNotUseThisResultForCutting
+          : null,
     );
   }
 
@@ -139,14 +150,20 @@ class PipeCalculator {
     double? pricePerKg,
     int decimals = 2,
   }) {
-    _positive(diameter, '外径');
-    _positive(thickness, '壁厚');
-    _positive(length, '长度');
-    _positive(density, '材料密度');
+    _positive(diameter, AppStrings.outsideDiameter);
+    _positive(thickness, AppStrings.wallThickness);
+    _positive(length, AppStrings.length);
+    _positive(density, AppStrings.materialDensity);
     if (thickness >= diameter / 2) {
-      throw const FormatException('壁厚必须小于外径的一半');
+      throw const FormatException(
+        AppStrings.wallThicknessMustBeLessThanHalfTheOutsideDiameter,
+      );
     }
-    if (quantity <= 0) throw const FormatException('数量必须为正整数');
+    if (quantity <= 0) {
+      throw const FormatException(
+        AppStrings.quantityMustBeAPositiveWholeNumber,
+      );
+    }
     final inner = diameter - thickness * 2;
     final area =
         math.pi /
@@ -156,22 +173,24 @@ class PipeCalculator {
     final one = perMeter * length;
     final total = one * quantity;
     final values = <String, String>{
-      '内径': '${_f(inner, decimals)} mm',
-      '截面积': '${_f(area * 1000000, decimals)} mm²',
-      '每米理论重量': '${_f(perMeter, decimals)} kg/m',
-      '单根重量': '${_f(one, decimals)} kg',
-      '总长度': '${_f(length * quantity, decimals)} m',
-      '总重量': '${_f(total, decimals)} kg',
+      AppStrings.insideDiameter: '${_f(inner, decimals)} mm',
+      AppStrings.crossSectionalArea: '${_f(area * 1000000, decimals)} mm²',
+      AppStrings.weightPerMetre: '${_f(perMeter, decimals)} kg/m',
+      AppStrings.weightPerPipe: '${_f(one, decimals)} kg',
+      AppStrings.totalLength: '${_f(length * quantity, decimals)} m',
+      AppStrings.totalWeight: '${_f(total, decimals)} kg',
     };
     if (pricePerKg != null && pricePerKg > 0) {
-      values['估算材料成本'] = '¥${_f(total * pricePerKg, 2)}';
+      values[AppStrings.estimatedMaterialCost] =
+          '${useEnglish ? '' : '¥'}${_f(total * pricePerKg, 2)}';
     }
     return CalculationResult(
-      primaryLabel: '总重量',
+      primaryLabel: AppStrings.totalWeight,
       primaryValue: '${_f(total, decimals)} kg',
       values: values,
-      formula: '截面积 = π/4 × (外径² − 内径²)，重量 = 截面积 × 长度 × 密度',
-      warning: '理论重量受材料牌号、制造公差、涂层和实际尺寸影响。',
+      formula: AppStrings.area4ODIDWeightAreaLengthDensity,
+      warning: AppStrings
+          .theoreticalWeightVariesWithMaterialGradeTolerancesCoatingsAndActualDim,
     );
   }
 
@@ -183,8 +202,8 @@ class PipeCalculator {
     required bool descending,
     int decimals = 3,
   }) {
-    _positive(distanceMm, '总距离');
-    _positive(intervalMm, '测点间距');
+    _positive(distanceMm, AppStrings.totalDistance);
+    _positive(intervalMm, AppStrings.pointSpacing);
     final rate = slopePercent / 100;
     final dropMm = distanceMm * rate;
     final sign = descending ? -1 : 1;
@@ -202,16 +221,18 @@ class PipeCalculator {
     final ratio = rate == 0 ? '—' : '1:${_f(1 / rate.abs(), 2)}';
     final degrees = math.atan(rate) * 180 / math.pi;
     return CalculationResult(
-      primaryLabel: descending ? '总落差' : '总升高',
+      primaryLabel: descending ? AppStrings.totalFall : AppStrings.totalRise,
       primaryValue: '${descending ? '−' : '+'}${_f(dropMm.abs(), 3)} mm',
       values: {
-        descending ? '总落差' : '总升高':
+        descending ? AppStrings.totalFall : AppStrings.totalRise:
             '${descending ? '−' : '+'}${_f(dropMm.abs(), 3)} mm',
-        '终点标高': '${_f(endElevation, decimals)} m',
-        '坡度等价':
+        AppStrings.endElevation: '${_f(endElevation, decimals)} m',
+        AppStrings.equivalentSlope:
             '${_f(slopePercent, 2)}% · ${_f(rate * 1000, 2)}‰ · ${_f(rate * 1000, 2)} mm/m · $ratio · ${_f(degrees, 3)}°',
       },
-      formula: '测点标高 = 起点标高 ${descending ? '−' : '+'} 距离 × 坡度',
+      formula: AppStrings.pointElevationStartElevationDistanceSlope(
+        descending ? '−' : '+',
+      ),
       table: table,
     );
   }
@@ -221,18 +242,18 @@ class PipeCalculator {
     required double slopePercent,
     int decimals = 2,
   }) {
-    _positive(distanceMm, '水平距离');
+    _positive(distanceMm, AppStrings.horizontalDistance);
     final rate = slopePercent / 100;
     final drop = distanceMm * rate;
     return _slopeSummary(
       rate: rate,
-      primaryLabel: '落差',
+      primaryLabel: AppStrings.fall,
       primaryValue: '${_f(drop, decimals)} mm',
       values: {
-        '水平距离': '${_f(distanceMm, decimals)} mm',
-        '落差': '${_f(drop, decimals)} mm',
+        AppStrings.horizontalDistance: '${_f(distanceMm, decimals)} mm',
+        AppStrings.fall: '${_f(drop, decimals)} mm',
       },
-      formula: '落差 = 水平距离 × 坡度',
+      formula: AppStrings.fallHorizontalDistanceSlope,
       decimals: decimals,
     );
   }
@@ -242,17 +263,17 @@ class PipeCalculator {
     required double dropMm,
     int decimals = 2,
   }) {
-    _positive(distanceMm, '水平距离');
+    _positive(distanceMm, AppStrings.horizontalDistance);
     final rate = dropMm / distanceMm;
     return _slopeSummary(
       rate: rate,
-      primaryLabel: '坡度',
+      primaryLabel: AppStrings.slope,
       primaryValue: '${_f(rate * 100, decimals)}%',
       values: {
-        '水平距离': '${_f(distanceMm, decimals)} mm',
-        '落差': '${_f(dropMm, decimals)} mm',
+        AppStrings.horizontalDistance: '${_f(distanceMm, decimals)} mm',
+        AppStrings.fall: '${_f(dropMm, decimals)} mm',
       },
-      formula: '坡度 = 落差 ÷ 水平距离',
+      formula: AppStrings.slopeFallHorizontalDistance,
       decimals: decimals,
     );
   }
@@ -263,19 +284,22 @@ class PipeCalculator {
     required double distanceMm,
     int decimals = 2,
   }) {
-    _positive(distanceMm, '水平距离');
+    _positive(distanceMm, AppStrings.horizontalDistance);
     final differenceMm = (endElevation - startElevation) * 1000;
     final rate = differenceMm / distanceMm;
     return _slopeSummary(
       rate: rate,
-      primaryLabel: rate < 0 ? '下降坡度' : '上升坡度',
+      primaryLabel: rate < 0
+          ? AppStrings.downwardSlope
+          : AppStrings.upwardSlope,
       primaryValue: '${_f(rate.abs() * 100, decimals)}%',
       values: {
-        '起点标高': '${_f(startElevation, 3)} m',
-        '终点标高': '${_f(endElevation, 3)} m',
-        '高差': '${differenceMm >= 0 ? '+' : ''}${_f(differenceMm, decimals)} mm',
+        AppStrings.startElevation: '${_f(startElevation, 3)} m',
+        AppStrings.endElevation: '${_f(endElevation, 3)} m',
+        AppStrings.elevationChange:
+            '${differenceMm >= 0 ? '+' : ''}${_f(differenceMm, decimals)} mm',
       },
-      formula: '坡度 = (终点标高 − 起点标高) ÷ 水平距离',
+      formula: AppStrings.slopeEndElevationStartElevationHorizontalDistance,
       decimals: decimals,
     );
   }
@@ -290,7 +314,7 @@ class PipeCalculator {
   }) {
     final ratio = rate == 0 ? '—' : '1:${_f(1 / rate.abs(), 2)}';
     final degrees = math.atan(rate.abs()) * 180 / math.pi;
-    values['坡度等价'] =
+    values[AppStrings.equivalentSlope] =
         '${_f(rate.abs() * 100, decimals)}% · ${_f(rate.abs() * 1000, decimals)}‰ · ${_f(rate.abs() * 1000, decimals)} mm/m · $ratio · ${_f(degrees, 3)}°';
     return CalculationResult(
       primaryLabel: primaryLabel,
@@ -302,16 +326,22 @@ class PipeCalculator {
 
   static void _angle(double value) {
     if (value <= 0 || value >= 90) {
-      throw const FormatException('角度必须大于 0° 且小于 90°');
+      throw const FormatException(
+        AppStrings.angleMustBeGreaterThan0AndLessThan90,
+      );
     }
   }
 
   static void _positive(num value, String name) {
-    if (!value.isFinite || value <= 0) throw FormatException('$name必须大于 0');
+    if (!value.isFinite || value <= 0) {
+      throw FormatException(AppStrings.mustBeGreaterThanZero(name));
+    }
   }
 
   static void _nonNegative(num value, String name) {
-    if (!value.isFinite || value < 0) throw FormatException('$name不能小于 0');
+    if (!value.isFinite || value < 0) {
+      throw FormatException(AppStrings.cannotBeNegative(name));
+    }
   }
 
   static String _f(num value, int decimals) => value.toStringAsFixed(decimals);

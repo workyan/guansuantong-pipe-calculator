@@ -1,3 +1,4 @@
+import 'package:guansuantong_pipe_calculator/app_language.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:guansuantong_pipe_calculator/calculation_engine.dart';
 
@@ -11,7 +12,7 @@ void main() {
         right: 50,
         decimals: 2,
       );
-      expect(result.values['斜管中心线行程'], '707.11 mm');
+      expect(result.values[AppStrings.centerlineTravel], '707.11 mm');
       expect(result.primaryValue, '607.11 mm');
     });
 
@@ -24,8 +25,8 @@ void main() {
         right: 50,
         decimals: 2,
       );
-      expect(result.values['真实偏移量'], '500.00 mm');
-      expect(result.values['滚动角'], '53.13°');
+      expect(result.values[AppStrings.trueOffset], '500.00 mm');
+      expect(result.values[AppStrings.rollAngle], '53.13°');
       expect(result.primaryValue, '607.11 mm');
     });
 
@@ -71,7 +72,7 @@ void main() {
         density: 7850,
         decimals: 2,
       );
-      expect(result.values['每米理论重量'], '4.22 kg/m');
+      expect(result.values[AppStrings.weightPerMetre], '4.22 kg/m');
       expect(result.primaryValue, '25.30 kg');
     });
   });

@@ -1,0 +1,85 @@
+{
+  "platform": "android",
+  "locale": "en-US",
+  "build": "1.0.0+1 (debug capture of actual app UI)",
+  "device": "Android API 35 ARM64 emulator; 1080×1920, density 320",
+  "applicationId": "com.cc.guansuantong",
+  "apkSha256": "dcfa6e6424712ee5b4f289ab47be8fae661f0b75fe0645b876dd60f84efe63b9",
+  "capturedAt": "2026-10-12T10:48:39.323964+00:00",
+  "commitBeforeChanges": "8c9504a5b7fca6e00ce754aa20a94c8b1c46f127",
+  "captureBridge": "Native debug-only intent extras; real widgets with deterministic sample data",
+  "slides": [
+    {
+      "id": "01-offset-tools",
+      "scene": "home-overview",
+      "file": "01-offset-tools.png",
+      "scrollPixels": 0,
+      "scrollTarget": null,
+      "width": 1080,
+      "height": 1920,
+      "sha256": "70ee7f0e01a9767635f01ef56e8119bf73c19f8cbdccc9db543ad72d2d58f01d",
+      "runtimeErrorLogEmpty": true,
+      "foregroundActivityConfirmed": true
+    },
+    {
+      "id": "02-rolling-offset",
+      "scene": "rolling-offset",
+      "file": "02-rolling-offset.png",
+      "scrollPixels": 0,
+      "scrollTarget": "App-controlled focus on a complete UI section",
+      "width": 1080,
+      "height": 1920,
+      "sha256": "1331b55b0b3eb74db02b3b9a6a0527f508171c1fcaaec138b4293bf35a8a0eca",
+      "runtimeErrorLogEmpty": true,
+      "foregroundActivityConfirmed": true
+    },
+    {
+      "id": "03-slope-elevation",
+      "scene": "slope-elevation",
+      "file": "03-slope-elevation.png",
+      "scrollPixels": 0,
+      "scrollTarget": "App-controlled focus on a complete UI section",
+      "width": 1080,
+      "height": 1920,
+      "sha256": "e4cf9cd061cae6b15219fbd7161c9869f29b2b66396e7e0c081bc218a87dcd1f",
+      "runtimeErrorLogEmpty": true,
+      "foregroundActivityConfirmed": true
+    },
+    {
+      "id": "04-cut-length",
+      "scene": "cut-length",
+      "file": "04-cut-length.png",
+      "scrollPixels": 0,
+      "scrollTarget": null,
+      "width": 1080,
+      "height": 1920,
+      "sha256": "d43b28920579ee375868490054b37e3606514ac159903e7bb27b2c6cce9b82a6",
+      "runtimeErrorLogEmpty": true,
+      "foregroundActivityConfirmed": true
+    },
+    {
+      "id": "05-pipe-weight",
+      "scene": "pipe-weight",
+      "file": "05-pipe-weight.png",
+      "scrollPixels": 0,
+      "scrollTarget": "App-controlled focus on a complete UI section",
+      "width": 1080,
+      "height": 1920,
+      "sha256": "b48e2906eaf97ad3b8089cbeb3b54b827e04db41c4956069e84f59cc1d50ced1",
+      "runtimeErrorLogEmpty": true,
+      "foregroundActivityConfirmed": true
+    },
+    {
+      "id": "06-project-records",
+      "scene": "projects",
+      "file": "06-project-records.png",
+      "scrollPixels": 0,
+      "scrollTarget": null,
+      "width": 1080,
+      "height": 1920,
+      "sha256": "2e233384d33dd870ce96d5cd6971108b737c4619dcfb7ea46a703081efd240c4",
+      "runtimeErrorLogEmpty": true,
+      "foregroundActivityConfirmed": true
+    }
+  ]
+}

@@ -5,7 +5,7 @@
     "width": 1080,
     "height": 1920
   },
-  "status": "draft-using-real-ios-references",
+  "status": "real-english-android-captures",
   "slides": [
     {
       "id": "01-offset-tools",
@@ -13,7 +13,7 @@
       "headline": "Pipe calculations,\nin one place",
       "androidFile": "01-offset-tools.png",
       "altText": "Pipe QuickCalc: pipe calculations, in one place.",
-      "sourceStatus": "Actual iOS reference. Final Android capture required."
+      "sourceStatus": "Actual Android emulator capture of the app with deterministic sample data."
     },
     {
       "id": "02-rolling-offset",
@@ -21,7 +21,8 @@
       "headline": "Resolve rolling\noffsets",
       "androidFile": "02-rolling-offset.png",
       "altText": "Pipe QuickCalc: resolve rolling offsets.",
-      "sourceStatus": "Actual iOS reference. Final Android capture required."
+      "sourceStatus": "Actual Android emulator capture of the app with deterministic sample data.",
+      "scrollTarget": "App-controlled focus on a complete UI section"
     },
     {
       "id": "03-slope-elevation",
@@ -29,7 +30,8 @@
       "headline": "Set out each\nelevation",
       "androidFile": "03-slope-elevation.png",
       "altText": "Pipe QuickCalc: set out each elevation.",
-      "sourceStatus": "Actual iOS reference. Final Android capture required."
+      "sourceStatus": "Actual Android emulator capture of the app with deterministic sample data.",
+      "scrollTarget": "App-controlled focus on a complete UI section"
     },
     {
       "id": "04-cut-length",
@@ -37,7 +39,7 @@
       "headline": "Find the net\ncut length",
       "androidFile": "04-cut-length.png",
       "altText": "Pipe QuickCalc: find the net cut length.",
-      "sourceStatus": "Actual iOS reference. Final Android capture required."
+      "sourceStatus": "Actual Android emulator capture of the app with deterministic sample data."
     },
     {
       "id": "05-pipe-weight",
@@ -45,7 +47,8 @@
       "headline": "Estimate pipe\nweight",
       "androidFile": "05-pipe-weight.png",
       "altText": "Pipe QuickCalc: estimate pipe weight.",
-      "sourceStatus": "Actual iOS reference. Final Android capture required."
+      "sourceStatus": "Actual Android emulator capture of the app with deterministic sample data.",
+      "scrollTarget": "App-controlled focus on a complete UI section"
     },
     {
       "id": "06-project-records",
@@ -53,7 +56,7 @@
       "headline": "Keep each job\ntogether",
       "androidFile": "06-project-records.png",
       "altText": "Pipe QuickCalc: keep each job together.",
-      "sourceStatus": "Actual iOS reference. Final Android capture required."
+      "sourceStatus": "Actual Android emulator capture of the app with deterministic sample data."
     }
   ]
 }

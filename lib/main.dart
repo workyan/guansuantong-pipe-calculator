@@ -1,7 +1,9 @@
+import 'app_language.dart';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart' show ScrollCacheExtent;
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -38,7 +40,7 @@ class PipeQuickCalcApp extends StatelessWidget {
         final state = AppState.instance;
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: '管算通',
+          title: AppStrings.pipeQuickCalc,
           themeMode: state.themeMode,
           theme: _theme(Brightness.light),
           darkTheme: _theme(Brightness.dark),
@@ -107,12 +109,17 @@ class _ScreenshotScenePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const map = {
-      'rolling-offset': '滚动偏移',
-      'slope-elevation': '坡度标高',
-      'cut-length': '切管长度',
-      'pipe-weight': '管材重量',
+      'rolling-offset': AppStrings.rollingOffset,
+      'slope-elevation': AppStrings.slopeElevation,
+      'cut-length': AppStrings.cutLength,
+      'pipe-weight': AppStrings.pipeWeight,
     };
-    if (map.containsKey(scene)) return CalculatorPage(type: map[scene]!);
+    if (map.containsKey(scene)) {
+      return CalculatorPage(
+        type: map[scene]!,
+        screenshotFocus: Platform.isAndroid ? scene : null,
+      );
+    }
     return HomeShell(initialIndex: scene == 'projects' ? 1 : 0);
   }
 }
@@ -144,14 +151,14 @@ class OnboardingPage extends StatelessWidget {
                   ),
                   const SizedBox(width: 12),
                   const Text(
-                    '管算通',
+                    AppStrings.pipeQuickCalc,
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800),
                   ),
                 ],
               ),
               const SizedBox(height: 32),
               Text(
-                '现场尺寸，\n算清再下料。',
+                AppStrings.checkTheDimensionsThenMakeTheCut,
                 style: Theme.of(context).textTheme.displaySmall?.copyWith(
                   height: 1.12,
                   fontWeight: FontWeight.w800,
@@ -160,7 +167,8 @@ class OnboardingPage extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               const Text(
-                '弯头偏移、坡度标高、切管长度与管材重量，一次买断，完全离线。',
+                AppStrings
+                    .offsetsElevationsCutLengthsAndPipeWeightCoreCalculationsWorkOffline,
                 style: TextStyle(fontSize: 16, height: 1.6, color: _muted),
               ),
               const SizedBox(height: 20),
@@ -189,7 +197,8 @@ class OnboardingPage extends StatelessWidget {
                   SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      '数据只保存在本机。结果用于放样辅助，切割与安装前请由专业人员复核。',
+                      AppStrings
+                          .yourDataStaysOnYourDeviceCheckTheDimensionsAndResultsBeforeCuttingOrIn,
                       style: TextStyle(
                         fontSize: 12,
                         height: 1.45,
@@ -207,7 +216,7 @@ class OnboardingPage extends StatelessWidget {
                   onPressed: AppState.instance.completeOnboarding,
                   style: FilledButton.styleFrom(backgroundColor: _green),
                   child: const Text(
-                    '使用公制开始',
+                    AppStrings.startWithMetricUnits,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                   ),
                 ),
@@ -247,11 +256,20 @@ class _HomeShellState extends State<HomeShell> {
         destinations: const [
           NavigationDestination(
             icon: Icon(CupertinoIcons.function),
-            label: '计算',
+            label: AppStrings.calculate,
           ),
-          NavigationDestination(icon: Icon(CupertinoIcons.folder), label: '项目'),
-          NavigationDestination(icon: Icon(CupertinoIcons.book), label: '参考'),
-          NavigationDestination(icon: Icon(CupertinoIcons.gear), label: '设置'),
+          NavigationDestination(
+            icon: Icon(CupertinoIcons.folder),
+            label: AppStrings.projects,
+          ),
+          NavigationDestination(
+            icon: Icon(CupertinoIcons.book),
+            label: AppStrings.reference,
+          ),
+          NavigationDestination(
+            icon: Icon(CupertinoIcons.gear),
+            label: AppStrings.settings,
+          ),
         ],
       ),
     );
@@ -259,11 +277,31 @@ class _HomeShellState extends State<HomeShell> {
 }
 
 const _tools = <_Tool>[
-  _Tool('弯头偏移', '单平面放样', 'assets/generated/elbow_offset.png'),
-  _Tool('滚动偏移', '水平 + 垂直偏移', 'assets/generated/rolling_offset.png'),
-  _Tool('坡度标高', '落差与测点表', 'assets/generated/slope_elevation.png'),
-  _Tool('切管长度', '中心距扣除', 'assets/generated/cut_length.png'),
-  _Tool('管材重量', '理论重量估算', 'assets/generated/pipe_weight.png'),
+  _Tool(
+    AppStrings.elbowOffset,
+    AppStrings.singlePlaneOffset,
+    'assets/generated/elbow_offset.png',
+  ),
+  _Tool(
+    AppStrings.rollingOffset,
+    AppStrings.horizontalVerticalOffsets,
+    'assets/generated/rolling_offset.png',
+  ),
+  _Tool(
+    AppStrings.slopeElevation,
+    AppStrings.fallAndElevationPoints,
+    'assets/generated/slope_elevation.png',
+  ),
+  _Tool(
+    AppStrings.cutLength,
+    AppStrings.centerDistanceAndTakeOffs,
+    'assets/generated/cut_length.png',
+  ),
+  _Tool(
+    AppStrings.pipeWeight,
+    AppStrings.theoreticalWeightEstimate,
+    'assets/generated/pipe_weight.png',
+  ),
 ];
 
 class _Tool {
@@ -299,7 +337,7 @@ class CalculatorHome extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '管算通',
+                          AppStrings.pipeQuickCalc,
                           style: TextStyle(
                             fontSize: 29,
                             fontWeight: FontWeight.w800,
@@ -307,7 +345,7 @@ class CalculatorHome extends StatelessWidget {
                         ),
                         SizedBox(height: 3),
                         Text(
-                          '现场常用计算 · 公制',
+                          AppStrings.fieldCalculationsMetric,
                           style: TextStyle(fontSize: 13, color: _muted),
                         ),
                       ],
@@ -323,7 +361,7 @@ class CalculatorHome extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: const Text(
-                      '离线',
+                      AppStrings.offline,
                       style: TextStyle(
                         color: _green,
                         fontSize: 12,
@@ -353,7 +391,9 @@ class CalculatorHome extends StatelessWidget {
               ),
             ),
           ),
-          const SliverToBoxAdapter(child: _SectionTitle('全部计算器')),
+          const SliverToBoxAdapter(
+            child: _SectionTitle(AppStrings.allCalculators),
+          ),
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 8),
             sliver: SliverList.separated(
@@ -387,10 +427,10 @@ class CalculatorHome extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: _SectionTitle(
-              '最近结果',
+              AppStrings.recentResults,
               action: state.records.isEmpty
                   ? null
-                  : '${state.records.length} 条',
+                  : AppStrings.records(state.records.length),
             ),
           ),
           SliverToBoxAdapter(
@@ -398,7 +438,7 @@ class CalculatorHome extends StatelessWidget {
                 ? const Padding(
                     padding: EdgeInsets.fromLTRB(20, 12, 20, 28),
                     child: Text(
-                      '完成一次计算后，结果会自动保存在这里。',
+                      AppStrings.yourCompletedCalculationsAppearHere,
                       style: TextStyle(color: _muted),
                     ),
                   )
@@ -517,19 +557,24 @@ class _SectionTitle extends StatelessWidget {
 }
 
 class CalculatorPage extends StatefulWidget {
-  const CalculatorPage({super.key, required this.type});
+  const CalculatorPage({super.key, required this.type, this.screenshotFocus});
   final String type;
+  final String? screenshotFocus;
   @override
   State<CalculatorPage> createState() => _CalculatorPageState();
 }
 
 class _CalculatorPageState extends State<CalculatorPage> {
   final _formKey = GlobalKey<FormState>();
+  final _scrollController = ScrollController();
+  final _inputsKey = GlobalKey();
+  final _resultsKey = GlobalKey();
+  final _weightLengthKey = GlobalKey();
   late final Map<String, TextEditingController> c;
   double angle = 45;
   int slopeMode = 3;
   bool descending = true;
-  String material = '碳钢';
+  String material = AppStrings.carbonSteel;
   CalculationResult? result;
   String? error;
   bool sharing = false;
@@ -544,8 +589,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
       'offset': TextEditingController(text: '500'),
       'horizontal': TextEditingController(text: '600'),
       'vertical': TextEditingController(text: '300'),
-      'left': TextEditingController(text: widget.type == '切管长度' ? '90' : '50'),
-      'right': TextEditingController(text: widget.type == '切管长度' ? '95' : '50'),
+      'left': TextEditingController(
+        text: widget.type == AppStrings.cutLength ? '90' : '50',
+      ),
+      'right': TextEditingController(
+        text: widget.type == AppStrings.cutLength ? '95' : '50',
+      ),
       'center': TextEditingController(text: '3200'),
       'elevation': TextEditingController(text: '100.000'),
       'slope': TextEditingController(text: '1.50'),
@@ -563,11 +612,32 @@ class _CalculatorPageState extends State<CalculatorPage> {
     for (final controller in c.values) {
       controller.addListener(_calculate);
     }
-    WidgetsBinding.instance.addPostFrameCallback((_) => _calculate());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _calculate();
+      if (widget.screenshotFocus != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted) return;
+          final anchor = switch (widget.screenshotFocus) {
+            'rolling-offset' => _inputsKey,
+            'slope-elevation' => _resultsKey,
+            'pipe-weight' => _weightLengthKey,
+            _ => null,
+          };
+          final context = anchor?.currentContext;
+          if (context != null) {
+            Scrollable.ensureVisible(
+              context,
+              alignment: widget.screenshotFocus == 'pipe-weight' ? .015 : 0,
+            );
+          }
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
+    _scrollController.dispose();
     for (final controller in c.values) {
       controller.dispose();
     }
@@ -580,14 +650,14 @@ class _CalculatorPageState extends State<CalculatorPage> {
     try {
       final decimals = AppState.instance.decimals;
       final next = switch (widget.type) {
-        '弯头偏移' => PipeCalculator.elbow(
+        AppStrings.elbowOffset => PipeCalculator.elbow(
           offset: _n('offset'),
           angle: angle == 0 ? _n('angle') : angle,
           left: _n('left'),
           right: _n('right'),
           decimals: decimals,
         ),
-        '滚动偏移' => PipeCalculator.rolling(
+        AppStrings.rollingOffset => PipeCalculator.rolling(
           horizontal: _n('horizontal'),
           vertical: _n('vertical'),
           angle: angle == 0 ? _n('angle') : angle,
@@ -595,7 +665,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           right: _n('right'),
           decimals: decimals,
         ),
-        '坡度标高' => switch (slopeMode) {
+        AppStrings.slopeElevation => switch (slopeMode) {
           0 => PipeCalculator.slopeDrop(
             distanceMm: _n('distance'),
             slopePercent: _n('slope'),
@@ -621,7 +691,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
             decimals: decimals.clamp(1, 3),
           ),
         },
-        '切管长度' => PipeCalculator.cut(
+        AppStrings.cutLength => PipeCalculator.cut(
           center: _n('center'),
           left: _n('left'),
           right: _n('right'),
@@ -647,7 +717,9 @@ class _CalculatorPageState extends State<CalculatorPage> {
       if (mounted) {
         setState(() {
           result = null;
-          error = e is FormatException ? e.message.toString() : '请检查输入数值';
+          error = e is FormatException
+              ? e.message.toString()
+              : AppStrings.checkTheInputValues;
         });
       }
     }
@@ -669,7 +741,9 @@ class _CalculatorPageState extends State<CalculatorPage> {
           AnimatedBuilder(
             animation: state,
             builder: (context, _) => IconButton(
-              tooltip: state.favorites.contains(widget.type) ? '取消收藏' : '收藏',
+              tooltip: state.favorites.contains(widget.type)
+                  ? AppStrings.removeFavorite
+                  : AppStrings.favorites,
               onPressed: () => state.toggleFavorite(widget.type),
               icon: Icon(
                 state.favorites.contains(widget.type)
@@ -684,6 +758,10 @@ class _CalculatorPageState extends State<CalculatorPage> {
       body: Form(
         key: _formKey,
         child: ListView(
+          controller: _scrollController,
+          scrollCacheExtent: widget.screenshotFocus != null
+              ? const ScrollCacheExtent.pixels(10000)
+              : null,
           padding: const EdgeInsets.fromLTRB(20, 8, 20, 120),
           children: [
             Container(
@@ -698,16 +776,18 @@ class _CalculatorPageState extends State<CalculatorPage> {
               ),
             ),
             const SizedBox(height: 24),
-            const Text(
-              '输入',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+            Text(
+              AppStrings.inputs,
+              key: _inputsKey,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 12),
             ..._inputs(),
             const SizedBox(height: 22),
-            const Text(
-              '计算结果',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+            Text(
+              AppStrings.results,
+              key: _resultsKey,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 12),
             AnimatedSwitcher(
@@ -718,7 +798,9 @@ class _CalculatorPageState extends State<CalculatorPage> {
                       key: ValueKey(result!.primaryValue),
                       result: result!,
                     )
-                  : _ErrorPanel(message: error ?? '请输入完整参数'),
+                  : _ErrorPanel(
+                      message: error ?? AppStrings.enterAllRequiredValues,
+                    ),
             ),
           ],
         ),
@@ -739,7 +821,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                 child: OutlinedButton.icon(
                   onPressed: result == null ? null : _copy,
                   icon: const Icon(CupertinoIcons.doc_on_doc, size: 18),
-                  label: const Text('复制'),
+                  label: const Text(AppStrings.copy),
                 ),
               ),
               const SizedBox(width: 10),
@@ -754,7 +836,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
                       : const Icon(CupertinoIcons.share, size: 18),
-                  label: Text(sharing ? '打开中' : '分享'),
+                  label: Text(sharing ? AppStrings.opening : AppStrings.share),
                 ),
               ),
               const SizedBox(width: 10),
@@ -763,7 +845,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                   onPressed: result == null ? null : _save,
                   style: FilledButton.styleFrom(backgroundColor: _green),
                   icon: const Icon(CupertinoIcons.folder_badge_plus, size: 18),
-                  label: const Text('保存'),
+                  label: const Text(AppStrings.save),
                 ),
               ),
             ],
@@ -776,7 +858,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   List<Widget> _inputs() {
     final commonAngle = [
       const Text(
-        '弯头角度',
+        AppStrings.elbowAngle,
         style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
       ),
       const SizedBox(height: 8),
@@ -786,7 +868,9 @@ class _CalculatorPageState extends State<CalculatorPage> {
         children: [22.5, 30.0, 45.0, 60.0, 0.0].map((value) {
           return ChoiceChip(
             label: Text(
-              value == 0 ? '自定义' : '${value.toString().replaceAll('.0', '')}°',
+              value == 0
+                  ? AppStrings.custom
+                  : '${value.toString().replaceAll('.0', '')}°',
             ),
             selected: angle == value,
             showCheckmark: false,
@@ -799,33 +883,47 @@ class _CalculatorPageState extends State<CalculatorPage> {
       ),
       if (angle == 0) ...[
         const SizedBox(height: 10),
-        _field('自定义角度', 'angle', '°'),
+        _field(AppStrings.customAngle, 'angle', '°'),
       ],
       const SizedBox(height: 14),
     ];
     return switch (widget.type) {
-      '弯头偏移' => [
-        _field('目标偏移量', 'offset', 'mm'),
+      AppStrings.elbowOffset => [
+        _field(AppStrings.offset, 'offset', 'mm'),
         ...commonAngle,
-        _field('左端中心至端面', 'left', 'mm'),
-        _field('右端中心至端面', 'right', 'mm'),
+        _field(AppStrings.leftCenterToEnd, 'left', 'mm'),
+        _field(AppStrings.rightCenterToEnd, 'right', 'mm'),
       ],
-      '滚动偏移' => [
-        _field('水平偏移 H', 'horizontal', 'mm', signed: true),
-        _field('垂直偏移 V', 'vertical', 'mm', signed: true),
+      AppStrings.rollingOffset => [
+        _field(AppStrings.horizontalOffsetH, 'horizontal', 'mm', signed: true),
+        _field(AppStrings.verticalOffsetV, 'vertical', 'mm', signed: true),
         ...commonAngle,
-        _field('左端中心至端面', 'left', 'mm'),
-        _field('右端中心至端面', 'right', 'mm'),
+        _field(AppStrings.leftCenterToEnd, 'left', 'mm'),
+        _field(AppStrings.rightCenterToEnd, 'right', 'mm'),
       ],
-      '坡度标高' => [
+      AppStrings.slopeElevation => [
         DropdownButtonFormField<int>(
           initialValue: slopeMode,
-          decoration: const InputDecoration(labelText: '计算模式'),
+          decoration: const InputDecoration(
+            labelText: AppStrings.calculationMode,
+          ),
           items: const [
-            DropdownMenuItem(value: 0, child: Text('已知距离和坡度，求落差')),
-            DropdownMenuItem(value: 1, child: Text('已知距离和落差，求坡度')),
-            DropdownMenuItem(value: 2, child: Text('已知起止标高，求坡度')),
-            DropdownMenuItem(value: 3, child: Text('按间距生成测点标高表')),
+            DropdownMenuItem(
+              value: 0,
+              child: Text(AppStrings.findFallFromDistanceAndSlope),
+            ),
+            DropdownMenuItem(
+              value: 1,
+              child: Text(AppStrings.findSlopeFromDistanceAndFall),
+            ),
+            DropdownMenuItem(
+              value: 2,
+              child: Text(AppStrings.findSlopeFromStartAndEndElevations),
+            ),
+            DropdownMenuItem(
+              value: 3,
+              child: Text(AppStrings.generateElevationPoints),
+            ),
           ],
           onChanged: (value) {
             setState(() => slopeMode = value!);
@@ -834,32 +932,32 @@ class _CalculatorPageState extends State<CalculatorPage> {
         ),
         const SizedBox(height: 8),
         if (slopeMode == 0) ...[
-          _field('水平距离', 'distance', 'mm'),
-          _field('坡度', 'slope', '%', signed: true),
+          _field(AppStrings.horizontalDistance, 'distance', 'mm'),
+          _field(AppStrings.slope, 'slope', '%', signed: true),
         ],
         if (slopeMode == 1) ...[
-          _field('水平距离', 'distance', 'mm'),
-          _field('落差', 'drop', 'mm', signed: true),
+          _field(AppStrings.horizontalDistance, 'distance', 'mm'),
+          _field(AppStrings.fall, 'drop', 'mm', signed: true),
         ],
         if (slopeMode == 2) ...[
-          _field('起点标高', 'elevation', 'm', signed: true),
-          _field('终点标高', 'endElevation', 'm', signed: true),
-          _field('水平距离', 'distance', 'mm'),
+          _field(AppStrings.startElevation, 'elevation', 'm', signed: true),
+          _field(AppStrings.endElevation, 'endElevation', 'm', signed: true),
+          _field(AppStrings.horizontalDistance, 'distance', 'mm'),
         ],
         if (slopeMode == 3) ...[
-          _field('起点标高', 'elevation', 'm', signed: true),
-          _field('坡度', 'slope', '%'),
-          _field('总距离', 'distance', 'mm'),
-          _field('测点间距', 'interval', 'mm'),
+          _field(AppStrings.startElevation, 'elevation', 'm', signed: true),
+          _field(AppStrings.slope, 'slope', '%'),
+          _field(AppStrings.totalDistance, 'distance', 'mm'),
+          _field(AppStrings.pointSpacing, 'interval', 'mm'),
           const Text(
-            '方向',
+            AppStrings.direction,
             style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 8),
           SegmentedButton<bool>(
             segments: const [
-              ButtonSegment(value: true, label: Text('下降')),
-              ButtonSegment(value: false, label: Text('上升')),
+              ButtonSegment(value: true, label: Text(AppStrings.down)),
+              ButtonSegment(value: false, label: Text(AppStrings.up)),
             ],
             selected: {descending},
             onSelectionChanged: (value) {
@@ -870,19 +968,24 @@ class _CalculatorPageState extends State<CalculatorPage> {
           const SizedBox(height: 14),
         ],
       ],
-      '切管长度' => [
-        _field('两连接点中心距', 'center', 'mm'),
-        _field('左端扣除尺寸', 'left', 'mm'),
-        _field('右端扣除尺寸', 'right', 'mm'),
+      AppStrings.cutLength => [
+        _field(AppStrings.centerToCenterDistance, 'center', 'mm'),
+        _field(AppStrings.leftTakeOffHc4599a, 'left', 'mm'),
+        _field(AppStrings.rightTakeOffHb548fa, 'right', 'mm'),
       ],
       _ => [
-        _field('外径', 'diameter', 'mm'),
-        _field('壁厚', 'thickness', 'mm'),
-        _field('单根长度', 'length', 'm'),
-        _field('数量', 'quantity', '根', integer: true),
+        _field(AppStrings.outsideDiameter, 'diameter', 'mm'),
+        _field(AppStrings.wallThickness, 'thickness', 'mm'),
+        _field(AppStrings.lengthPerPipe, 'length', 'm'),
+        _field(
+          AppStrings.quantity,
+          'quantity',
+          AppStrings.pipes,
+          integer: true,
+        ),
         DropdownButtonFormField<String>(
           initialValue: material,
-          decoration: const InputDecoration(labelText: '材料'),
+          decoration: const InputDecoration(labelText: AppStrings.material),
           items: PipeCalculator.densities.entries
               .map(
                 (e) => DropdownMenuItem(
@@ -897,7 +1000,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           },
         ),
         const SizedBox(height: 12),
-        _field('参考单价（可选）', 'price', '元/kg'),
+        _field(AppStrings.unitPriceOptional, 'price', AppStrings.currencyKg),
       ],
     };
   }
@@ -910,6 +1013,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
     bool integer = false,
   }) {
     return Padding(
+      key: key == 'length' ? _weightLengthKey : null,
       padding: const EdgeInsets.only(bottom: 12),
       child: TextFormField(
         controller: c[key],
@@ -931,7 +1035,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
   Future<void> _copy() async {
     await Clipboard.setData(ClipboardData(text: _text));
-    if (mounted) _toast('结果已复制');
+    if (mounted) _toast(AppStrings.resultCopied);
   }
 
   Future<void> _share() async {
@@ -946,12 +1050,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
       if (mounted) {
         _toast(
           exception.message?.isNotEmpty == true
-              ? '无法打开分享：${exception.message}'
-              : '无法打开系统分享，请稍后重试',
+              ? AppStrings.cannotOpenSharing(exception.message)
+              : AppStrings.cannotOpenSharingTryAgain,
         );
       }
     } catch (_) {
-      if (mounted) _toast('无法打开系统分享，请稍后重试');
+      if (mounted) _toast(AppStrings.cannotOpenSharingTryAgain);
     } finally {
       if (mounted) setState(() => sharing = false);
     }
@@ -961,7 +1065,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
     final state = AppState.instance;
     if (state.projects.isEmpty) {
       await state.addRecord(widget.type, result!.primaryValue, _text);
-      if (mounted) _toast('已保存到历史记录');
+      if (mounted) _toast(AppStrings.savedToHistory);
       return;
     }
     if (!mounted) return;
@@ -974,14 +1078,14 @@ class _CalculatorPageState extends State<CalculatorPage> {
           children: [
             const ListTile(
               title: Text(
-                '保存计算结果',
+                AppStrings.saveCalculation,
                 style: TextStyle(fontWeight: FontWeight.w800),
               ),
-              subtitle: Text('可保存到历史或指定项目'),
+              subtitle: Text(AppStrings.saveToHistoryOrAProject),
             ),
             ListTile(
               leading: const Icon(CupertinoIcons.clock),
-              title: const Text('仅保存到历史'),
+              title: const Text(AppStrings.historyOnly),
               onTap: () => Navigator.pop(context, ''),
             ),
             ...state.projects.map(
@@ -1003,7 +1107,13 @@ class _CalculatorPageState extends State<CalculatorPage> {
       _text,
       projectId: choice.isEmpty ? null : choice,
     );
-    if (mounted) _toast(choice.isEmpty ? '已保存到历史' : '已加入项目');
+    if (mounted) {
+      _toast(
+        choice.isEmpty
+            ? AppStrings.savedToHistoryHc7ff90
+            : AppStrings.addedToProject,
+      );
+    }
   }
 
   void _toast(String text) {
@@ -1077,7 +1187,10 @@ class _ResultPanel extends StatelessWidget {
         ),
         if (result.table.isNotEmpty) ...[
           const Divider(height: 24),
-          const Text('测点标高表', style: TextStyle(fontWeight: FontWeight.w800)),
+          const Text(
+            AppStrings.elevationPoints,
+            style: TextStyle(fontWeight: FontWeight.w800),
+          ),
           const SizedBox(height: 6),
           ...result.table.map(
             (row) => Padding(
@@ -1122,7 +1235,10 @@ class _ResultPanel extends StatelessWidget {
             ),
           ),
         const SizedBox(height: 16),
-        const Text('计算过程', style: TextStyle(fontWeight: FontWeight.w800)),
+        const Text(
+          AppStrings.calculationSteps,
+          style: TextStyle(fontWeight: FontWeight.w800),
+        ),
         const SizedBox(height: 6),
         Text(
           result.formula,
@@ -1159,10 +1275,10 @@ class ProjectsPage extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
             child: _PageHeader(
-              title: '项目',
-              subtitle: '按现场或区域归档计算结果',
+              title: AppStrings.projects,
+              subtitle: AppStrings.groupCalculationsByJobOrArea,
               action: IconButton(
-                tooltip: '新建项目',
+                tooltip: AppStrings.newProject,
                 onPressed: () => _addProject(context),
                 icon: const Icon(
                   CupertinoIcons.add_circled_solid,
@@ -1176,9 +1292,10 @@ class ProjectsPage extends StatelessWidget {
               hasScrollBody: false,
               child: _EmptyState(
                 icon: CupertinoIcons.folder,
-                title: '还没有项目',
-                detail: '新建项目后，可在计算结果页将记录归档。',
-                action: '新建项目',
+                title: AppStrings.noProjectsYet,
+                detail:
+                    AppStrings.createAProjectThenAddResultsFromAnyCalculator,
+                action: AppStrings.newProject,
                 onTap: () => _addProject(context),
               ),
             )
@@ -1196,8 +1313,10 @@ class ProjectsPage extends StatelessWidget {
                   return Dismissible(
                     key: ValueKey(project.id),
                     direction: DismissDirection.endToStart,
-                    confirmDismiss: (_) =>
-                        _confirmDelete(context, '删除项目及其中记录？'),
+                    confirmDismiss: (_) => _confirmDelete(
+                      context,
+                      AppStrings.deleteThisProjectAndItsRecords,
+                    ),
                     onDismissed: (_) => state.deleteProject(project.id),
                     background: Container(
                       alignment: Alignment.centerRight,
@@ -1221,7 +1340,12 @@ class ProjectsPage extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.w800),
                       ),
                       subtitle: Text(
-                        '${project.location.isEmpty ? '未填写位置' : project.location}  ·  $count 条记录',
+                        AppStrings.recordsHf44ecf(
+                          project.location.isEmpty
+                              ? AppStrings.noLocation
+                              : project.location,
+                          count,
+                        ),
                       ),
                       trailing: const Icon(
                         CupertinoIcons.chevron_right,
@@ -1261,8 +1385,8 @@ class ProjectDetailPage extends StatelessWidget {
           if (records.isEmpty) {
             return const _EmptyState(
               icon: CupertinoIcons.doc,
-              title: '项目中暂无记录',
-              detail: '打开任一计算器，完成计算后选择“保存”。',
+              title: AppStrings.noRecordsInThisProject,
+              detail: AppStrings.completeACalculationThenChooseSave,
             );
           }
           return ListView.separated(
@@ -1296,38 +1420,38 @@ class ReferencePage extends StatelessWidget {
   const ReferencePage({super.key});
   static const articles = <_Article>[
     _Article(
-      '坡度单位换算',
-      '百分比、千分比、mm/m、比值与角度',
+      AppStrings.slopeConversions,
+      AppStrings.percentPerMilleMmMRatioAndAngle,
       CupertinoIcons.arrow_left_right,
       _ReferenceContent.slope,
     ),
     _Article(
-      '弯头角度乘数',
-      '22.5°、30°、45°、60° 快速复核',
+      AppStrings.elbowAngleMultipliers,
+      AppStrings.quickChecksFor2253045And60,
       CupertinoIcons.function,
       _ReferenceContent.elbow,
     ),
     _Article(
-      '管材重量公式',
-      '圆管截面积与理论重量计算',
+      AppStrings.pipeWeightFormula,
+      AppStrings.roundPipeAreaAndTheoreticalWeight,
       CupertinoIcons.cube_box,
       _ReferenceContent.weight,
     ),
     _Article(
-      '现场测量方法',
-      '中心距与中心至端面尺寸',
+      AppStrings.fieldMeasurements,
+      AppStrings.centerDistanceAndCenterToEndDimensions,
       CupertinoIcons.resize,
       _ReferenceContent.measure,
     ),
     _Article(
-      '结果复核清单',
-      '切割、焊接、安装前逐项确认',
+      AppStrings.resultChecklist,
+      AppStrings.checkBeforeCuttingWeldingOrInstalling,
       CupertinoIcons.check_mark_circled,
       _ReferenceContent.checklist,
     ),
     _Article(
-      '安全与责任说明',
-      '公式适用范围和使用边界',
+      AppStrings.scopeAndSafety,
+      AppStrings.formulaAssumptionsAndLimitations,
       CupertinoIcons.exclamationmark_shield,
       _ReferenceContent.safety,
     ),
@@ -1336,7 +1460,10 @@ class ReferencePage extends StatelessWidget {
   Widget build(BuildContext context) => CustomScrollView(
     slivers: [
       const SliverToBoxAdapter(
-        child: _PageHeader(title: '参考', subtitle: '自编公式说明与现场复核要点'),
+        child: _PageHeader(
+          title: AppStrings.reference,
+          subtitle: AppStrings.formulasAndPracticalChecks,
+        ),
       ),
       SliverPadding(
         padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
@@ -1393,50 +1520,77 @@ class _ReferenceDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final children = switch (article.content) {
       _ReferenceContent.slope => [
-        _p('坡度小数 s = 落差 ÷ 水平距离。'),
+        _p(AppStrings.decimalSlopeSFallHorizontalDistance),
         _table(const [
-          ('表示方式', '换算'),
-          ('百分比', 's × 100%'),
-          ('千分比', 's × 1000‰'),
-          ('毫米每米', 's × 1000 mm/m'),
-          ('比值', '1 : (1 ÷ |s|)'),
-          ('角度', 'atan(s)'),
+          (AppStrings.format, AppStrings.conversion),
+          (AppStrings.percent, 's × 100%'),
+          (AppStrings.perMille, 's × 1000‰'),
+          (AppStrings.millimetresPerMetre, 's × 1000 mm/m'),
+          (AppStrings.ratio, '1 : (1 ÷ |s|)'),
+          (AppStrings.angle, 'atan(s)'),
         ]),
-        _note('示例：2% = 20‰ = 20 mm/m = 1:50 ≈ 1.146°。'),
+        _note(AppStrings.example22020MmM1501146),
       ],
       _ReferenceContent.elbow => [
-        _p('斜管中心线行程 T = 偏移 O ÷ sin(θ)；推进 A = O ÷ tan(θ)。'),
+        _p(AppStrings.centerlineTravelTOffsetOSinAdvanceAOTan),
         _table(const [
-          ('角度', '行程乘数 1/sin(θ)'),
+          (AppStrings.angle, AppStrings.travelMultiplier1Sin),
           ('22.5°', '2.613'),
           ('30°', '2.000'),
           ('45°', '1.414'),
           ('60°', '1.155'),
         ]),
-        _note('乘数只用于快速复核，正式下料仍应使用实际输入和管件扣除尺寸。'),
+        _note(
+          AppStrings
+              .useMultipliersForQuickChecksOnlyUseActualMeasurementsAndFittingTakeOff,
+        ),
       ],
       _ReferenceContent.weight => [
-        _p('内径 d = 外径 D − 2 × 壁厚 t。'),
-        _p('截面积 A = π/4 × (D² − d²)。\n理论重量 = A × 长度 × 密度。'),
-        _note('参考密度不是材料验收值；牌号、公差、涂层会影响实际重量。'),
+        _p(AppStrings.insideDiameterDOutsideDiameterD2WallThicknessT),
+        _p(AppStrings.areaA4DDTheoreticalWeightALengthDensity),
+        _note(
+          AppStrings
+              .referenceDensityIsNotAMaterialAcceptanceValueGradeTolerancesAndCoating,
+        ),
       ],
       _ReferenceContent.measure => [
-        _p('中心距：两个连接管件中心线交点之间的距离。'),
-        _p('中心至端面：从管件中心线交点量到焊口或连接端面的距离。'),
-        _note('不同标准、压力等级、系列和厂家尺寸可能不同，应以现场实物或厂家资料为准。'),
+        _p(
+          AppStrings
+              .centerDistanceTheDistanceBetweenTheTwoFittingCenterlineIntersections,
+        ),
+        _p(
+          AppStrings
+              .centerToEndTheDistanceFromTheFittingCenterlineIntersectionToItsConnect,
+        ),
+        _note(
+          AppStrings
+              .dimensionsVaryByStandardPressureClassAndManufacturerUseActualFittingsO,
+        ),
       ],
       _ReferenceContent.checklist => [
-        _check('单位是否一致，英制与公制没有混用'),
-        _check('测量基准点是否都是中心线或端面'),
-        _check('弯头角度、方向和滚动面是否正确'),
-        _check('左右管件扣除尺寸是否分别核对'),
-        _check('保温、坡口、焊缝收缩或安装余量是否另行考虑'),
-        _check('关键尺寸是否由第二人独立复核'),
+        _check(AppStrings.useConsistentUnitsDoNotMixMetricAndImperial),
+        _check(AppStrings.confirmWhetherReferencePointsAreCenterlinesOrFaces),
+        _check(AppStrings.checkElbowAngleDirectionAndRollPlane),
+        _check(AppStrings.checkTheFittingTakeOffAtEachEnd),
+        _check(
+          AppStrings
+              .allowSeparatelyForInsulationBevelsWeldShrinkageAndInstallation,
+        ),
+        _check(AppStrings.haveCriticalDimensionsCheckedIndependently),
       ],
       _ReferenceContent.safety => [
-        _p('本工具用于现场几何、坡度和理论重量的计算辅助，不替代设计、审图、验收或专业人员签字。'),
-        _p('本工具不提供承压等级、材料适用性、焊接工艺或施工合规结论。'),
-        _note('施工、切割、焊接和安装前，必须由具备相应能力的人员结合图纸、规范与现场条件复核。'),
+        _p(
+          AppStrings
+              .thisToolAssistsWithGeometrySlopeAndTheoreticalWeightItDoesNotReplaceEn,
+        ),
+        _p(
+          AppStrings
+              .thisToolDoesNotDeterminePressureRatingsMaterialSuitabilityWeldingProce,
+        ),
+        _note(
+          AppStrings
+              .beforeFabricationOrInstallationAQualifiedPersonMustCheckTheDrawingAppl,
+        ),
       ],
     };
     return Scaffold(
@@ -1506,61 +1660,76 @@ class SettingsPage extends StatelessWidget {
       builder: (context, _) => ListView(
         padding: const EdgeInsets.only(bottom: 24),
         children: [
-          const _PageHeader(title: '设置', subtitle: '显示、记录与隐私'),
-          _settingsLabel('显示'),
+          const _PageHeader(
+            title: AppStrings.settings,
+            subtitle: AppStrings.displayRecordsAndPrivacy,
+          ),
+          _settingsLabel(AppStrings.display),
           _settingsTile(
             context,
-            '结果小数位',
-            '${state.decimals} 位',
+            AppStrings.decimalPlaces,
+            AppStrings.places(state.decimals),
             onTap: () => _chooseDecimals(context),
           ),
-          _settingsTile(context, '外观', switch (state.themeMode) {
-            ThemeMode.system => '跟随系统',
-            ThemeMode.light => '浅色',
-            ThemeMode.dark => '深色',
-          }, onTap: () => _chooseTheme(context)),
-          _settingsLabel('数据'),
+          _settingsTile(
+            context,
+            AppStrings.appearance,
+            switch (state.themeMode) {
+              ThemeMode.system => AppStrings.system,
+              ThemeMode.light => AppStrings.light,
+              ThemeMode.dark => AppStrings.dark,
+            },
+            onTap: () => _chooseTheme(context),
+          ),
+          _settingsLabel(AppStrings.data),
           SwitchListTile.adaptive(
             contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-            title: const Text('自动保存历史'),
-            subtitle: const Text('最多保留最近 200 条，仅存储在本机'),
+            title: const Text(AppStrings.saveHistoryAutomatically),
+            subtitle: const Text(
+              AppStrings.upTo200RecentRecordsStoredOnThisDevice,
+            ),
             value: state.saveHistory,
             activeTrackColor: _green,
             onChanged: state.setSaveHistory,
           ),
           _settingsTile(
             context,
-            '清空非项目历史',
-            '${state.records.where((r) => r.projectId == null).length} 条',
+            AppStrings.clearUnfiledHistory,
+            AppStrings.records(
+              state.records.where((r) => r.projectId == null).length,
+            ),
             destructive: true,
             onTap: () => _clearHistory(context),
           ),
-          _settingsLabel('关于'),
+          _settingsLabel(AppStrings.about),
           _settingsTile(
             context,
-            '隐私政策',
-            '不收集数据',
+            AppStrings.privacyPolicy,
+            AppStrings.noDataCollection,
             onTap: () => _showInfo(
               context,
-              '隐私政策',
-              '管算通不要求注册，不接入广告、分析或第三方追踪。项目、历史和设置仅保存在设备本地。只有在你主动使用分享功能时，结果才会交给系统分享面板。删除 App 会同时删除本地数据。',
+              AppStrings.privacyPolicy,
+              AppStrings
+                  .pipeQuickCalcHasNoAccountsAdsAnalyticsOrTrackingSDKsProjectsHistoryAnd,
             ),
           ),
           _settingsTile(
             context,
-            '支持与反馈',
+            AppStrings.support,
             '',
             onTap: () => _showInfo(
               context,
-              '支持与反馈',
-              '如需反馈计算口径或使用问题，请在 App Store 商品页使用“App 支持”链接联系开发者。请勿发送包含敏感项目资料的截图。',
+              AppStrings.support,
+              AppStrings
+                  .forHelpWithCalculationsOrTheAppContact1535883467QqComRemoveConfidentia,
             ),
           ),
-          _settingsTile(context, '版本', '1.0.0 (1)'),
+          _settingsTile(context, AppStrings.version, '1.0.0 (1)'),
           const Padding(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: Text(
-              '结果仅用于估算、放样辅助和技术参考。施工前必须复核。',
+              AppStrings
+                  .resultsAreCalculationAidsVerifyDimensionsAndConditionsBeforeFabricatio,
               style: TextStyle(fontSize: 12, height: 1.5, color: _muted),
             ),
           ),
@@ -1692,32 +1861,36 @@ Future<void> _addProject(BuildContext context) async {
   final created = await showDialog<bool>(
     context: context,
     builder: (context) => AlertDialog(
-      title: const Text('新建项目'),
+      title: const Text(AppStrings.newProject),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
             controller: name,
             autofocus: true,
-            decoration: const InputDecoration(labelText: '项目名称'),
+            decoration: const InputDecoration(
+              labelText: AppStrings.projectName,
+            ),
           ),
           const SizedBox(height: 12),
           TextField(
             controller: location,
-            decoration: const InputDecoration(labelText: '位置或区域（可选）'),
+            decoration: const InputDecoration(
+              labelText: AppStrings.locationOrAreaOptional,
+            ),
           ),
         ],
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context, false),
-          child: const Text('取消'),
+          child: const Text(AppStrings.cancel),
         ),
         FilledButton(
           onPressed: () {
             if (name.text.trim().isNotEmpty) Navigator.pop(context, true);
           },
-          child: const Text('创建'),
+          child: const Text(AppStrings.create),
         ),
       ],
     ),
@@ -1733,16 +1906,19 @@ Future<bool> _confirmDelete(BuildContext context, String message) async {
   return await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('请确认'),
+          title: const Text(AppStrings.confirm),
           content: Text(message),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, false),
-              child: const Text('取消'),
+              child: const Text(AppStrings.cancel),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context, true),
-              child: const Text('删除', style: TextStyle(color: Colors.red)),
+              child: const Text(
+                AppStrings.delete,
+                style: TextStyle(color: Colors.red),
+              ),
             ),
           ],
         ),
@@ -1789,7 +1965,7 @@ void _showRecord(BuildContext context, SavedRecord record) {
                       );
                       if (context.mounted) Navigator.pop(context);
                     },
-                    child: const Text('复制'),
+                    child: const Text(AppStrings.copy),
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -1809,8 +1985,10 @@ void _showRecord(BuildContext context, SavedRecord record) {
                               SnackBar(
                                 content: Text(
                                   exception.message?.isNotEmpty == true
-                                      ? '无法打开分享：${exception.message}'
-                                      : '无法打开系统分享，请稍后重试',
+                                      ? AppStrings.cannotOpenSharing(
+                                          exception.message,
+                                        )
+                                      : AppStrings.cannotOpenSharingTryAgain,
                                 ),
                               ),
                             );
@@ -1818,7 +1996,7 @@ void _showRecord(BuildContext context, SavedRecord record) {
                         }
                       },
                       style: FilledButton.styleFrom(backgroundColor: _green),
-                      child: const Text('分享'),
+                      child: const Text(AppStrings.share),
                     ),
                   ),
                 ),
@@ -1862,7 +2040,7 @@ Future<void> _chooseDecimals(BuildContext context) async {
                       : CupertinoIcons.circle,
                   color: number == state.decimals ? _green : _muted,
                 ),
-                title: Text('$number 位小数'),
+                title: Text(AppStrings.decimalPlacesH9115ec(number)),
                 onTap: () => Navigator.pop(context, number),
               ),
             )
@@ -1883,9 +2061,9 @@ Future<void> _chooseTheme(BuildContext context) async {
         mainAxisSize: MainAxisSize.min,
         children:
             [
-                  (ThemeMode.system, '跟随系统'),
-                  (ThemeMode.light, '浅色'),
-                  (ThemeMode.dark, '深色'),
+                  (ThemeMode.system, AppStrings.system),
+                  (ThemeMode.light, AppStrings.light),
+                  (ThemeMode.dark, AppStrings.dark),
                 ]
                 .map(
                   (item) => ListTile(
@@ -1907,7 +2085,10 @@ Future<void> _chooseTheme(BuildContext context) async {
 }
 
 Future<void> _clearHistory(BuildContext context) async {
-  if (await _confirmDelete(context, '清空所有未归档到项目的历史记录？')) {
+  if (await _confirmDelete(
+    context,
+    AppStrings.clearAllHistoryThatIsNotFiledInAProject,
+  )) {
     await AppState.instance.clearHistory();
   }
 }
@@ -1921,7 +2102,7 @@ void _showInfo(BuildContext context, String title, String body) {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('知道了'),
+          child: const Text(AppStrings.ok),
         ),
       ],
     ),
